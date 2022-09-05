@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv="Cache-Control" content="no-store">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <script type="text/javascript" src="./index.js?version=1"></script>
+    <link href='index.css' rel='stylesheet'>
+  </head>
+  <body>
+
+    <h1>Token Balance Checker <span id="version">v.0.0.0</span></h1>
+
+    <h2>INPUT</h2>
+    <div>
+      <label>RPC URL</label>
+      <input type="text" id="rpc_url" value="https://klaytn04.fandom.finance/" placeholder="(e.g. https://polygon-rpc.com/)">
+    </div>
+
+    <div>
+      <label>TOKEN ADDRESS</label>
+      <input type="text" id="token_address" value="0x9a6469aac7cd70385bdca6fa9e9356acec9c5b16" placeholder="トークンのアドレス。（e.g. 0x0000...）">
+    </div>
+
+    <dvi>
+      <label>WALLET ADDRESS</label>
+      <input type="text" id="wallet_address" value="0xd58b2fa48c0cd15fd5d9586e4b32e83fd4a2409d" placeholder="監視したいウォレットのアドレス（e.g. 0x0000...）">
+    </div>
+
+    <h2>SWITCH</h2>
+    <div>
+      <label>BOT</label>
+      <button id="toggle_button" onclick="toggle_checker_switch()">Off</button>
+    </div>
+
+    <h2>LOG</h2>
+    <div id="status_message"></div>
+
+  </body>
+</html>
