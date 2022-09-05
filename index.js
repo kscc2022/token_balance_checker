@@ -2,7 +2,7 @@ const USUAL_TOKEN_ABI = [
   {"constant": true, "inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
 ];
 
-const version = "v0.0.1";
+const version = "v0.0.2";
 
 let rpc_url = ""
 let wallet_address = "";
@@ -12,6 +12,7 @@ let executing = false;
 let turned_on_switch = false;
 let status_messages = [];
 let prev_amount = -1;
+let should_loop = true;
 
 const se = new Audio('./se.mp3');
 
@@ -44,9 +45,16 @@ async function get_balance_of() {
   return balance;
 }
 
-function play_notification_sound() {
-  se.play();
+function play_notification_sound(loop = true) {
+  should_loop = loop;
+  se.play()
 }
+
+se.addEventListener('ended', function(){
+  if (should_loop) {
+    play_notification_sound();
+  }
+}, false);
 
 function toggle_checker_switch() {
   turned_on_switch = !turned_on_switch;
@@ -63,14 +71,19 @@ function toggle_checker_switch() {
   if (turned_on_switch) {
     for (const input of inputs) {
       input.setAttribute("disabled", "disabled");
-      play_notification_sound();
+      play_notification_sound(false);
     }
   } else {
     for (const input of inputs) {
       input.removeAttribute("disabled");
     }
-    stop_notification_sound();
+    stop_se_loop();
   }
+}
+
+function stop_se_loop() {
+  should_loop = false;
+  se.pause();
 }
 
 async function check_balance() {
